@@ -1,0 +1,41 @@
+.color-text {
+  color: #ff8110;
+}
+
+.fondo {
+  background-color: #ff8110;
+}
+
+.logo-nav {
+    width: 50px;
+    height: 50px;
+}
+
+.boton {
+    background-color: #ff8110;
+    color: white;
+  }
+  
+  .boton:hover {
+    background-color: #f89842;
+    color: white;
+  }
+  
+  .form-border {
+    border: 1px solid #ff8110;
+  }
+  
+  .form-border::placeholder {
+    color: #ff8110;
+    opacity: 1;
+  }
+  
+  .form-border:focus {
+    border-color: #ff8110 !important;
+    box-shadow: 0 0 8px 4px rgba(248, 152, 66, 0.75) !important;
+    outline: none !important;
+  }
+
+  .alerta{
+    color: red;
+  }
