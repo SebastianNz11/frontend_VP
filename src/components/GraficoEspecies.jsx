@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -82,8 +82,7 @@ const ReporteEspeciesPDF = ({ chartImage, datos }) => (
       </View>
 
       <Text style={styles.footer}>
-        Generado automáticamente por el sistema-{" "}
-        {new Date().toLocaleDateString()}
+        Generado automáticamente por el sistema - {new Date().toLocaleDateString()}
       </Text>
     </Page>
   </Document>
@@ -98,7 +97,7 @@ export const GraficoEspecies = () => {
   useEffect(() => {
     const obtenerDatos = async () => {
       try {
-        const response = await fetch("http://localhost:4000/mascotas");
+        const response = await fetch(`${import.meta.env.VITE_LINKBACKEND}/mascotas`);
         const result = await response.json();
         const mascotas = result.items || result;
 
@@ -159,6 +158,17 @@ export const GraficoEspecies = () => {
         <>
           <Bar
             data={dataChart}
+            options={{
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: {
+                    precision: 0,
+                    stepSize: 1,
+                  },
+                },
+              },
+            }}
             ref={(element) => {
               if (element && element.canvas) {
                 chartRef.current = element.chartInstance || element;

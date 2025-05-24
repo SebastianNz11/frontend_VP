@@ -9,7 +9,7 @@ export const FormHistoriales = () => {
     setModificarHistoriales,
     updateHistoriales,
     mascotas,
-    citas
+    citas,
   } = useContext(GeneralContext);
 
   const {
@@ -21,7 +21,7 @@ export const FormHistoriales = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data)
+    console.log(data);
     if (modificarHistoriales) {
       console.log(modificarHistoriales);
       updateHistoriales(modificarHistoriales.id_historial, data);
@@ -42,6 +42,10 @@ export const FormHistoriales = () => {
       setValue("id_cita", modificarHistoriales.id_cita);
     }
   }, [modificarHistoriales, setValue]);
+  const handleClear = () => {
+    reset();
+    setModificarHistoriales(null);
+  };
 
   return (
     <div>
@@ -49,11 +53,11 @@ export const FormHistoriales = () => {
         <h1 className="color-text mb-3">Registro de Historiales</h1>
         <select
           id="miSelect"
-          className="form-select form-border mb-3"
+          className="form-select form-border mb-3 color-text"
           {...register("id_mascota", { required: "Seleccione una mascota" })}
         >
           <option value="" hidden>
-            Seleccione una opción
+            Seleccione una mascota
           </option>
           {mascotas.map((opcion) => (
             <option key={opcion.id_mascota} value={opcion.id_mascota}>
@@ -83,7 +87,9 @@ export const FormHistoriales = () => {
             },
           })}
         />
-        {errors.descripcion && <p className="alerta">{errors.descripcion.message}</p>}
+        {errors.descripcion && (
+          <p className="alerta">{errors.descripcion.message}</p>
+        )}
         <input
           type="text"
           className="form-control form-border mb-3"
@@ -103,7 +109,9 @@ export const FormHistoriales = () => {
             },
           })}
         />
-        {errors.tratamiento && <p className="alerta">{errors.tratamiento.message}</p>}
+        {errors.tratamiento && (
+          <p className="alerta">{errors.tratamiento.message}</p>
+        )}
         <input
           type="text"
           className="form-control form-border mb-3"
@@ -123,10 +131,13 @@ export const FormHistoriales = () => {
             },
           })}
         />
-        {errors.observaciones && <p className="alerta">{errors.observaciones.message}</p>}
+        {errors.observaciones && (
+          <p className="alerta">{errors.observaciones.message}</p>
+        )}
+        <label htmlFor="" className="color-text form-label">Fecha</label>
         <input
           type="date"
-          className="form-control form-border mb-3"
+          className="form-control form-border mb-3 color-text"
           placeholder="Fecha"
           {...register("fechaH", {
             required: {
@@ -138,11 +149,11 @@ export const FormHistoriales = () => {
         {errors.fechaH && <p className="alerta">{errors.fechaH.message}</p>}
         <select
           id="miSelect"
-          className="form-select form-border mb-3"
+          className="form-select form-border mb-3 color-text"
           {...register("id_cita", { required: "Seleccione una cita" })}
         >
           <option value="" hidden>
-            Seleccione una opción
+            Seleccione una cita
           </option>
           {citas.map((opcion) => (
             <option key={opcion.id_cita} value={opcion.id_cita}>
@@ -154,7 +165,6 @@ export const FormHistoriales = () => {
           <p className="alerta mt-2">{errors.id_cita.message}</p>
         )}
 
-
         <div>
           <button
             type="submit"
@@ -162,6 +172,11 @@ export const FormHistoriales = () => {
           >
             {modificarHistoriales ? "Modificar" : "Registrar"}
           </button>
+          {modificarHistoriales && (
+            <button className="btn btn-success ms-3" onClick={handleClear}>
+              Cancelar
+            </button>
+          )}
         </div>
       </form>
     </div>

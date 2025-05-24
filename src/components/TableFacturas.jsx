@@ -2,7 +2,10 @@ import Datatable from "react-data-table-component";
 import { useContext } from "react";
 import { GeneralContext } from "../context/GeneralContext";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import { FacturaPDF } from "./FacturaPDF"; // Asegúrate que la ruta sea correcta
+import { FacturaPDF } from "./FacturaPDF";
+import { BsTrash3Fill } from "react-icons/bs";
+import { BsPencilFill } from "react-icons/bs";
+import { BsFillFileEarmarkTextFill } from "react-icons/bs";
 
 export const TableFacturas = () => {
   const { facturas, deleteFacturas, setModificarFacturas } =
@@ -47,20 +50,20 @@ export const TableFacturas = () => {
             className="btn btn-warning"
             onClick={() => setModificarFacturas(row)}
           >
-            M
+            <BsPencilFill />
           </button>
           <button
             className="btn btn-danger"
             onClick={() => deleteFacturas(row.id_factura)}
           >
-            E
+            <BsTrash3Fill />
           </button>
           <PDFDownloadLink
             document={<FacturaPDF factura={row} />}
             fileName={`factura_${row.id_factura}.pdf`}
             className="btn btn-primary"
           >
-            {({ loading }) => (loading ? "..." : "I")}
+            {({ loading }) => (loading ? "..." : <BsFillFileEarmarkTextFill />)}
           </PDFDownloadLink>
         </div>
       ),
@@ -68,7 +71,7 @@ export const TableFacturas = () => {
   ];
 
   return (
-    <div className="container">
+    <div className="container-fluid">
       <Datatable pagination columns={columns} data={facturas} />
     </div>
   );

@@ -3,7 +3,7 @@ import { TableInsumos } from "../components/TableInsumos";
 
 export const Insumos = () => {
   return (
-    <div className="container-fluid">
+    <div className="container-fluid mt-5">
       <div className="row">
         <div className="col-lg-4 col-sm-12">
           <FormInsumos />

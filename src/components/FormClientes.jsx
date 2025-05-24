@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { GeneralContext } from "../context/GeneralContext";
 
+
 export const FormClientes = () => {
   const {
     postCliente,
@@ -40,6 +41,11 @@ export const FormClientes = () => {
       setValue("direccion", modificarClientes.direccion);
     }
   }, [modificarClientes, setValue]);
+
+   const handleClear = () => {
+    reset();
+    setModificarClientes(null);
+  };
 
   return (
     <div>
@@ -162,6 +168,11 @@ export const FormClientes = () => {
           >
             {modificarClientes ? "Modificar" : "Registrar"}
           </button>
+          {modificarClientes && (
+            <button className="btn btn-success ms-3" onClick={handleClear}>
+              Cancelar
+            </button>
+          )}
         </div>
       </form>
     </div>

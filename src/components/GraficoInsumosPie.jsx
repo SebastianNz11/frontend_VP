@@ -91,7 +91,7 @@ export const GraficoInsumosPie = () => {
   useEffect(() => {
     const obtenerInsumos = async () => {
       try {
-        const response = await fetch("http://localhost:4000/insumos");
+        const response = await fetch(`${import.meta.env.VITE_LINKBACKEND}/insumos`);
         const result = await response.json();
         const data = result.items || result;
 

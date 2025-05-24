@@ -44,17 +44,22 @@ export const FormFactura = () => {
     }
   }, [modificarFacturas, setValue]);
 
+  const handleClear = () => {
+    reset();
+    setModificarFacturas(null);
+  };
+
   return (
-    <div>
+    <div className="mt-5">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1 className="color-text mb-3">Registro de facturas</h1>
         <select
           id="miSelect"
-          className="form-select form-border mb-3"
+          className="form-select form-border mb-3 color-text"
           {...register("id_cita", { required: "Seleccione una cita" })}
         >
           <option value="" hidden>
-            Seleccione una opción
+            Seleccione una cita
           </option>
           {citas.map((opcion) => (
             <option key={opcion.id_cita} value={opcion.id_cita}>
@@ -67,11 +72,11 @@ export const FormFactura = () => {
         )}
         <select
           id="miSelect"
-          className="form-select form-border mb-3"
+          className="form-select form-border mb-3 color-text"
           {...register("id_insumo", { required: "Seleccione un insumo" })}
         >
           <option value="" hidden>
-            Seleccione una opción
+            Seleccione un insumo
           </option>
           {insumos.map((opcion) => (
             <option key={opcion.id_insumo} value={opcion.id_insumo}>
@@ -84,11 +89,11 @@ export const FormFactura = () => {
         )}
         <select
           id="miSelect"
-          className="form-select form-border mb-3"
+          className="form-select form-border mb-3 color-text"
           {...register("id_metodo", { required: "Seleccione un metodo" })}
         >
           <option value="" hidden>
-            Seleccione una opción
+            Seleccione un método de pago
           </option>
           {metodos.map((opcion) => (
             <option key={opcion.id_metodo} value={opcion.id_metodo}>
@@ -101,7 +106,7 @@ export const FormFactura = () => {
         )}
         <input
           type="date"
-          className="form-control form-border mb-3"
+          className="form-control form-border mb-3 color-text"
           placeholder="Fecha"
           {...register("fechaF", {
             required: {
@@ -134,6 +139,11 @@ export const FormFactura = () => {
           >
             {modificarFacturas ? "Modificar" : "Registrar"}
           </button>
+          {modificarFacturas && (
+            <button className="btn btn-success ms-3" onClick={handleClear}>
+              Cancelar
+            </button>
+          )}
         </div>
       </form>
     </div>

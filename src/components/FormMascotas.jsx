@@ -42,6 +42,11 @@ export const FormMascotas = () => {
     }
   }, [modificarMascota, setValue]);
 
+  const handleClear = () => {
+    reset();
+    setModificarMascota(null);
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -125,11 +130,11 @@ export const FormMascotas = () => {
 
         <select
           id="miSelect"
-          className="form-select form-border"
+          className="form-select form-border color-text"
           {...register("id_cliente", { required: "Seleccione un cliente" })}
         >
           <option value="" hidden>
-            Seleccione una opción
+            Seleccione un cliente
           </option>
           {clientes.map((opcion) => (
             <option key={opcion.id_cliente} value={opcion.id_cliente}>
@@ -148,6 +153,11 @@ export const FormMascotas = () => {
           >
             {modificarMascota ? "Modificar" : "Registrar"}
           </button>
+          {modificarMascota && (
+            <button className="btn btn-success ms-3" onClick={handleClear}>
+              Cancelar
+            </button>
+          )}
         </div>
       </form>
     </div>

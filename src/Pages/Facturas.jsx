@@ -8,7 +8,7 @@ export const Facturas = () => {
         <div className="col-lg-11 col-sm-12 ms-4 ps-5 mb-4">
           <FormFactura />
         </div>
-        <div className="col-lg-12 col-sm-12">
+        <div className="col-lg-12 col-sm-12 p-0 m-0">
           <TableFacturas />
         </div>
       </div>

@@ -2,7 +2,6 @@ import { GraficoEspecies } from "../components/GraficoEspecies";
 import { GraficoInsumosPie } from "../components/GraficoInsumosPie";
 import { FacturasPorMes } from "../components/FacturasPorMes";
 import { MetodoPago } from "../components/MetodoPago";
-
 export const Graficas = () => {
   return (
     <div className="container-fluid">

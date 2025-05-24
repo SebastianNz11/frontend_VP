@@ -21,7 +21,7 @@ export const FormInsumos = () => {
       updateInsumo(modificarInsumos.id_insumo, data);
       setModificarInsumos(null);
     } else {
-        console.log(data);
+      console.log(data);
       postInsumo(data);
     }
     reset();
@@ -36,6 +36,10 @@ export const FormInsumos = () => {
       setValue("proveedor", modificarInsumos.proveedor);
     }
   }, [modificarInsumos, setValue]);
+  const handleClear = () => {
+    reset();
+    setModificarInsumos(null);
+  };
 
   return (
     <div>
@@ -78,9 +82,13 @@ export const FormInsumos = () => {
           })}
         />
         {errors.cantidad && <p className="alerta">{errors.cantidad.message}</p>}
+        <label htmlFor="" className="color-text form-label">
+          {" "}
+          Fecha de ingreso
+        </label>
         <input
           type="date"
-          className="form-control form-border mb-3"
+          className="form-control form-border mb-3 color-text"
           placeholder="Fecha Ingreso"
           {...register("fecha_ingresoI", {
             required: {
@@ -92,9 +100,13 @@ export const FormInsumos = () => {
         {errors.fecha_ingreso && (
           <p className="alerta">{errors.fecha_ingreso.message}</p>
         )}
+        <label htmlFor="" className="color-text form-label">
+          {" "}
+          Fecha de vencimiento
+        </label>
         <input
           type="date"
-          className="form-control form-border mb-3"
+          className="form-control form-border mb-3 color-text"
           placeholder="Fecha Vencimiento"
           {...register("fecha_vencimientoI", {
             required: {
@@ -135,6 +147,11 @@ export const FormInsumos = () => {
           >
             {modificarInsumos ? "Modificar" : "Registrar"}
           </button>
+          {modificarInsumos && (
+            <button className="btn btn-success ms-3" onClick={handleClear}>
+              Cancelar
+            </button>
+          )}
         </div>
       </form>
     </div>

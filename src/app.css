@@ -7,35 +7,85 @@
 }
 
 .logo-nav {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
 
 .boton {
-    background-color: #ff8110;
-    color: white;
-  }
-  
-  .boton:hover {
-    background-color: #f89842;
-    color: white;
-  }
-  
-  .form-border {
-    border: 1px solid #ff8110;
-  }
-  
-  .form-border::placeholder {
-    color: #ff8110;
-    opacity: 1;
-  }
-  
-  .form-border:focus {
-    border-color: #ff8110 !important;
-    box-shadow: 0 0 8px 4px rgba(248, 152, 66, 0.75) !important;
-    outline: none !important;
-  }
+  background-color: #ff8110;
+  color: white;
+  border: #ff8110;
+}
 
-  .alerta{
-    color: red;
+.boton:hover {
+  background-color: #f89842;
+  color: white;
+}
+
+.form-border {
+  border: 1px solid #ff8110;
+}
+
+.form-border::placeholder {
+  color: #ff8110;
+  opacity: 1;
+}
+
+.form-border:focus {
+  border-color: #ff8110 !important;
+  box-shadow: 0 0 8px 4px rgba(248, 152, 66, 0.75) !important;
+  outline: none !important;
+}
+
+.alerta {
+  color: red;
+}
+
+.loader-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  /* Opcional: fondo translúcido */
+  background: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.loader {
+  position: relative;
+  width: 108px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.loader::after,
+.loader::before {
+  content: '';
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  background-color: #FFF;
+  background-image: radial-gradient(circle 14px, #0d161b 100%, transparent 0);
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  animation: eyeMove 10s infinite, blink 10s infinite;
+}
+
+@keyframes eyeMove {
+  0%, 10% { background-position: 0px 0px; }
+  13%, 40% { background-position: -15px 0px; }
+  43%, 70% { background-position: 15px 0px; }
+  73%, 90% { background-position: 0px 15px; }
+  93%, 100% { background-position: 0px 0px; }
+}
+
+@keyframes blink {
+  0%, 10%, 12%, 20%, 22%, 40%, 42%, 60%, 62%, 70%, 72%, 90%, 92%, 98%, 100% {
+    height: 48px;
   }
+  11%, 21%, 41%, 61%, 71%, 91%, 99% {
+    height: 18px;
+  }
+}

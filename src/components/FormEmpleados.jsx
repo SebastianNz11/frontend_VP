@@ -8,7 +8,7 @@ export const FormEmpleados = () => {
     modificarEmpleados,
     setModificarEmpleados,
     updateEmpleados,
-    roles
+    roles,
   } = useContext(GeneralContext);
 
   const {
@@ -39,6 +39,11 @@ export const FormEmpleados = () => {
       setValue("id_rol", modificarEmpleados.id_rol);
     }
   }, [modificarEmpleados, setValue]);
+
+  const handleClear = () => {
+    reset();
+    setModificarEmpleados(null);
+  };
 
   return (
     <div>
@@ -89,11 +94,11 @@ export const FormEmpleados = () => {
 
         <select
           id="miSelect"
-          className="form-select form-border mb-3"
+          className="form-select form-border mb-3 color-text"
           {...register("id_rol", { required: "Seleccione un rol" })}
         >
           <option value="" hidden>
-            Seleccione una opción
+            Seleccione un rol
           </option>
           {roles.map((opcion) => (
             <option key={opcion.id_rol} value={opcion.id_rol}>
@@ -105,6 +110,27 @@ export const FormEmpleados = () => {
           <p className="alerta mt-2">{errors.id_cliente.message}</p>
         )}
 
+        <input
+          type="text"
+          className="form-control form-border mb-3"
+          placeholder="Contraseña"
+          {...register("contra", {
+            required: {
+              value: true,
+              message: "Contraseña es requerido",
+            },
+            minLength: {
+              value: 2,
+              message: "La contraseña debe contener más de 2 letras",
+            },
+            maxLength: {
+              value: 10,
+              message: "La contraseña no debe sobrepasar las 10 letras",
+            },
+          })}
+        />
+        {errors.contra && <p className="alerta">{errors.contra.message}</p>}
+
         <div>
           <button
             type="submit"
@@ -112,6 +138,11 @@ export const FormEmpleados = () => {
           >
             {modificarEmpleados ? "Modificar" : "Registrar"}
           </button>
+          {modificarEmpleados && (
+            <button className="btn btn-success ms-3" onClick={handleClear}>
+              Cancelar
+            </button>
+          )}
         </div>
       </form>
     </div>

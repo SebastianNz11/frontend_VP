@@ -1,6 +1,8 @@
 import Datatable from "react-data-table-component";
 import { useContext } from "react";
 import { GeneralContext } from "../context/GeneralContext";
+import { BsTrash3Fill } from "react-icons/bs";
+import { BsPencilFill } from "react-icons/bs";
 export const TableHistoriales = () => {
   const { historiales, deleteHistoriales, setModificarHistoriales } =
     useContext(GeneralContext);
@@ -48,13 +50,13 @@ export const TableHistoriales = () => {
             className="btn btn-warning me-2"
             onClick={() => setModificarHistoriales(row)}
           >
-            M
+            <BsPencilFill />
           </button>
           <button
             className="btn btn-danger"
             onClick={() => deleteHistoriales(row.id_historial)}
           >
-            E
+            <BsTrash3Fill />
           </button>
         </div>
       ),

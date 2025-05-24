@@ -1,6 +1,8 @@
 import Datatable from "react-data-table-component";
 import { useContext } from "react";
 import { GeneralContext } from "../context/GeneralContext";
+import { BsTrash3Fill } from "react-icons/bs";
+import { BsPencilFill } from "react-icons/bs";
 export const TableCita = () => {
   const { citas, deleteCita, setModificarCitas } =
     useContext(GeneralContext);
@@ -38,13 +40,13 @@ export const TableCita = () => {
             className="btn btn-warning me-2"
             onClick={() => setModificarCitas(row)}
           >
-            M
+            <BsPencilFill/>
           </button>
           <button
             className="btn btn-danger"
             onClick={() => deleteCita(row.id_cita)}
           >
-            E
+            <BsTrash3Fill/>
           </button>
         </div>
       ),

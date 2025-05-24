@@ -94,7 +94,7 @@ export const MetodoPago = () => {
   useEffect(() => {
     const obtenerFacturas = async () => {
       try {
-        const response = await fetch("http://localhost:4000/facturas/");
+        const response = await fetch(`${import.meta.env.VITE_LINKBACKEND}/facturas`);
         const result = await response.json();
         const facturas = result.items || result;
 

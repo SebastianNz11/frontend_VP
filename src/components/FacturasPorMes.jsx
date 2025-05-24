@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -27,7 +27,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
 
 const styles = StyleSheet.create({
   page: {
@@ -72,15 +71,11 @@ const styles = StyleSheet.create({
   },
 });
 
-
 const ReporteFacturasPDF = ({ chartImage, datos }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.header}>
-        <Image
-          style={styles.logo}
-          src="/VETPROB.png"
-        />
+        <Image style={styles.logo} src="/VETPROB.png" />
         <Text style={styles.title}>Reporte de Facturas por Mes</Text>
       </View>
 
@@ -89,7 +84,7 @@ const ReporteFacturasPDF = ({ chartImage, datos }) => (
       <View style={styles.dataBlock}>
         {datos.map((item, idx) => (
           <Text key={idx}>
-             {item.mes}: {item.cantidad} factura(s)
+            {item.mes}: {item.cantidad} factura(s)
           </Text>
         ))}
       </View>
@@ -110,7 +105,7 @@ export const FacturasPorMes = () => {
   useEffect(() => {
     const obtenerFacturas = async () => {
       try {
-        const response = await fetch("http://localhost:4000/facturas/");
+        const response = await fetch(`${import.meta.env.VITE_LINKBACKEND}/facturas`);
         const result = await response.json();
         const facturas = result.items || result;
 
@@ -163,7 +158,6 @@ export const FacturasPorMes = () => {
     obtenerFacturas();
   }, []);
 
-
   useEffect(() => {
     if (chartRef.current) {
       const base64Image = chartRef.current.toBase64Image();
@@ -173,19 +167,38 @@ export const FacturasPorMes = () => {
 
   return (
     <div>
-      <h2 className="color-text mb-4 text-center">
-        Facturas Emitidas por Mes
-      </h2>
+      <h2 className="color-text mb-4 text-center">Facturas Emitidas por Mes</h2>
       {dataChart ? (
         <>
           <Line
             data={dataChart}
+            options={{
+              responsive: true,
+              plugins: {
+                legend: {
+                  display: true,
+                  position: "top",
+                },
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: {
+                    stepSize: 1,
+                    callback: function (value) {
+                      return Number.isInteger(value) ? value : null;
+                    },
+                  },
+                },
+              },
+            }}
             ref={(element) => {
               if (element && element.canvas) {
                 chartRef.current = element.chartInstance || element;
               }
             }}
           />
+
           {chartImage && (
             <div className="text-center mt-5">
               <PDFDownloadLink

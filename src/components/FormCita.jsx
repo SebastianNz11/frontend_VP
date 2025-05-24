@@ -43,6 +43,11 @@ export const FormCita = () => {
       setValue("fecha", modificarCitas.fecha);
     }
   }, [modificarCitas, setValue]);
+  
+  const handleClear = () => {
+    reset();
+    setModificarCitas(null);
+  };
 
   return (
     <div>
@@ -50,11 +55,11 @@ export const FormCita = () => {
         <h1 className="color-text mb-3">Registro de citas</h1>
         <select
           id="miSelect"
-          className="form-select form-border mb-3"
+          className="form-select form-border mb-3 color-text"
           {...register("id_cliente", { required: "Seleccione un cliente" })}
         >
           <option value="" hidden>
-            Seleccione una opción
+            Seleccione un cliente
           </option>
           {clientes.map((opcion) => (
             <option key={opcion.id_cliente} value={opcion.id_cliente}>
@@ -67,11 +72,11 @@ export const FormCita = () => {
         )}
         <select
           id="miSelect"
-          className="form-select form-border mb-3"
+          className="form-select form-border mb-3 color-text"
           {...register("id_mascota", { required: "Seleccione una mascota" })}
         >
           <option value="" hidden>
-            Seleccione una opción
+            Seleccione una mascota
           </option>
           {mascotas.map((opcion) => (
             <option key={opcion.id_mascota} value={opcion.id_mascota}>
@@ -84,11 +89,11 @@ export const FormCita = () => {
         )}
         <select
           id="miSelect"
-          className="form-select form-border mb-3"
+          className="form-select form-border mb-3 color-text"
           {...register("id_servicio", { required: "Seleccione un servicio" })}
         >
           <option value="" hidden>
-            Seleccione una opción
+            Seleccione un servicio
           </option>
           {servicios.map((opcion) => (
             <option key={opcion.id_servicio} value={opcion.id_servicio}>
@@ -116,7 +121,7 @@ export const FormCita = () => {
         )}
         <input
           type="date"
-          className="form-control form-border mb-3"
+          className="form-control form-border mb-3 color-text"
           placeholder="Fecha"
           {...register("fechaC", {
             required: {
@@ -134,6 +139,11 @@ export const FormCita = () => {
           >
             {modificarCitas ? "Modificar" : "Registrar"}
           </button>
+          {modificarCitas && (
+            <button className="btn btn-success ms-3" onClick={handleClear}>
+              Cancelar
+            </button>
+          )}
         </div>
       </form>
     </div>
